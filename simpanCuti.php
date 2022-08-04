@@ -59,7 +59,7 @@
         <h1>Penyimpanan Data Cuti</h1> 
 <ul>
         <li><a href="index-admin.php">Home</a></li>
-        <li><a href="viewCuti.php">View Karyawan</a></li>
+        <li><a href="viewCuti.php">View Cuti</a></li>
 </ul>
        
 <?php 
