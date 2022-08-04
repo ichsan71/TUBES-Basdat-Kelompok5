@@ -93,7 +93,7 @@ display: block;
 </body><h1>Edit Data Golongan</h1>
 <ul>
         <li><a href="index-admin.php">Home</a></li>
-        <li><a href="viewGolongan.php">Karyawan</a></li>
+        <li><a href="viewGolongan.php">Golongan</a></li>
 </ul>
 
 <?php
