@@ -2,7 +2,7 @@
     define("DEVELOPMENT", TRUE); // menyatakan situs masih dalam pengambangan
         function dbConnect()
     {
-        $db = new mysqli("localhost", "root", "", "db_karyawan");
+        $db = new mysqli("localhost", "root", "I54n21lkjh", "db_karyawan");
             return $db;
     }
 

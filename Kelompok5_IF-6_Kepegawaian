@@ -1,0 +1,189 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 05, 2022 at 02:18 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db_karyawan`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cuti`
+--
+
+CREATE TABLE `cuti` (
+  `kode_cuti` varchar(12) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
+  `tanggal_cuti` date NOT NULL,
+  `jumlah_cuti` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cuti`
+--
+
+INSERT INTO `cuti` (`kode_cuti`, `id_karyawan`, `tanggal_cuti`, `jumlah_cuti`) VALUES
+('201', 10120210, '2022-08-13', 20000),
+('202', 10120215, '2022-08-30', 50000),
+('203', 10120222, '2022-08-20', 50000),
+('204', 10120219, '2022-09-03', 50000),
+('205', 10120236, '2022-08-29', 10000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gaji`
+--
+
+CREATE TABLE `gaji` (
+  `kode_gaji` varchar(10) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah_gaji` int(11) NOT NULL,
+  `potongan` int(11) NOT NULL,
+  `total_gaji_diterima` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gaji`
+--
+
+INSERT INTO `gaji` (`kode_gaji`, `id_karyawan`, `tanggal`, `jumlah_gaji`, `potongan`, `total_gaji_diterima`) VALUES
+('G01', 10120210, '2022-08-10', 800000, 50000, 750000),
+('G02', 10120215, '2022-08-14', 500000, 0, 500000),
+('G03', 10120222, '2022-08-21', 800000, 50000, 750000),
+('G04', 10120236, '2022-08-31', 600000, 0, 600000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `golongan`
+--
+
+CREATE TABLE `golongan` (
+  `kode_golongan` varchar(12) NOT NULL,
+  `nama_golongan` varchar(30) NOT NULL,
+  `tunjangan_istri` int(11) NOT NULL,
+  `tunjangan_anak` int(11) NOT NULL,
+  `gaji_pokok` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `golongan`
+--
+
+INSERT INTO `golongan` (`kode_golongan`, `nama_golongan`, `tunjangan_istri`, `tunjangan_anak`, `gaji_pokok`) VALUES
+('A', 'Pengatur', 0, 0, 800000),
+('B', 'Pembina', 0, 0, 500000),
+('C', 'Penata', 50000, 10000, 500000),
+('D', 'Penata', 30000, 12000, 300000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `id_karyawan` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `kode_golongan` varchar(12) NOT NULL,
+  `No_Telepon` varchar(12) NOT NULL,
+  `alamat` varchar(50) NOT NULL,
+  `Pass` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`id_karyawan`, `nama`, `kode_golongan`, `No_Telepon`, `alamat`, `Pass`) VALUES
+(10120210, 'Ichsan Kamil', 'A', '082281964812', 'Bogor', 10120210),
+(10120215, 'Rahma Yuniar', 'A', '082281964802', 'Bandung', 10120215),
+(10120219, 'Kalia', 'C', '085357559892', 'Bandung', 10120219),
+(10120222, 'Martinus Celvyn', 'C', '082356478197', 'Bandung', 10120222),
+(10120236, 'Bramantyo ', 'B', '082256789453', 'Cimahi', 10120236);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cuti`
+--
+ALTER TABLE `cuti`
+  ADD PRIMARY KEY (`kode_cuti`),
+  ADD KEY `id_karyawan` (`id_karyawan`);
+
+--
+-- Indexes for table `gaji`
+--
+ALTER TABLE `gaji`
+  ADD PRIMARY KEY (`kode_gaji`),
+  ADD KEY `id_karyawan` (`id_karyawan`);
+
+--
+-- Indexes for table `golongan`
+--
+ALTER TABLE `golongan`
+  ADD PRIMARY KEY (`kode_golongan`);
+
+--
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`id_karyawan`),
+  ADD KEY `kode_golongan` (`kode_golongan`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123456790;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cuti`
+--
+ALTER TABLE `cuti`
+  ADD CONSTRAINT `cuti_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`);
+
+--
+-- Constraints for table `gaji`
+--
+ALTER TABLE `gaji`
+  ADD CONSTRAINT `gaji_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`);
+
+--
+-- Constraints for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`kode_golongan`) REFERENCES `golongan` (`kode_golongan`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
