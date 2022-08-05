@@ -77,7 +77,7 @@ display: block;
 
     </head>
         <body>
-            <h1>Data Karyawan</h1>
+            <h1>Data Golongan</h1>
 
 <ul>
         <li><a href="index-admin.php">Home</a></li>
